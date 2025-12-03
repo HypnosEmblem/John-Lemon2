@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class WaypointPatrol : MonoBehaviour
 {
-    public float moveSpeed = 1.0f;
+    public float moveSpeed = 5.0f;
     public Transform[] waypoints;
 
     private Rigidbody m_RigidBody;
