@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed = 1.0f;
     public float turnSpeed = 20f;
     public bool playerFreeze = false;
+    public int unFreeze = 0;
 
     Rigidbody m_Rigidbody;
     Vector3 m_Movement;
@@ -47,10 +48,12 @@ public class PlayerMovement : MonoBehaviour
         m_Rigidbody.MoveRotation(m_Rotation);
         m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement * walkSpeed * Time.deltaTime);
 
-        if (playerFreeze == true)
+        if (Random.Range(0, 1000) == 0)
         {
             walkSpeed = 0;
             turnSpeed = 0;
+            playerFreeze = true;
+            unFreeze = 0;
         }
     }
 
