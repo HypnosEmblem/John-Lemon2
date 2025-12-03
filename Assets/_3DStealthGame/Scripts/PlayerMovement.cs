@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using Mono.Cecil.Cil;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms.Impl;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -54,6 +56,17 @@ public class PlayerMovement : MonoBehaviour
             turnSpeed = 0;
             playerFreeze = true;
             unFreeze = 0;
+        }
+        if (unFreeze == 5)
+        {
+            walkSpeed = 1.0f;
+            turnSpeed = 20f;
+            playerFreeze = false;
+            unFreeze = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            unFreeze++;
         }
     }
 
