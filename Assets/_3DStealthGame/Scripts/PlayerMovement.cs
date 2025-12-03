@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,10 +13,12 @@ public class PlayerMovement : MonoBehaviour
 
     public float walkSpeed = 1.0f;
     public float turnSpeed = 20f;
+    public bool playerFreeze = false;
 
     Rigidbody m_Rigidbody;
     Vector3 m_Movement;
     Quaternion m_Rotation = Quaternion.identity;
+    
 
     void Start()
     {
@@ -41,5 +46,12 @@ public class PlayerMovement : MonoBehaviour
 
         m_Rigidbody.MoveRotation(m_Rotation);
         m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement * walkSpeed * Time.deltaTime);
+
+        if (playerFreeze == true)
+        {
+            walkSpeed = 0;
+            turnSpeed = 0;
+        }
     }
+
 }
