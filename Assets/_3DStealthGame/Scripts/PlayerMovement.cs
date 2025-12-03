@@ -1,8 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using Mono.Cecil.Cil;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float walkSpeed = 1.0f;
     public float turnSpeed = 20f;
+    public bool playerFreeze = false;
+    public int unFreeze = 0;
     private bool playerFreeze = false;
     private int spaceBarPressed = 0;
 
@@ -107,5 +113,24 @@ public class PlayerMovement : MonoBehaviour
 
         m_Rigidbody.MoveRotation(m_Rotation);
         m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement * walkSpeed * Time.deltaTime);
+
+        if (Random.Range(0, 1000) == 0)
+        {
+            walkSpeed = 0;
+            turnSpeed = 0;
+            playerFreeze = true;
+            unFreeze = 0;
+        }
+        if (unFreeze == 5)
+        {
+            walkSpeed = 1.0f;
+            turnSpeed = 20f;
+            playerFreeze = false;
+            unFreeze = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            unFreeze++;
+        }
     }
 }
